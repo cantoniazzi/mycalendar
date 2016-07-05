@@ -1,0 +1,62 @@
+﻿@model Agenda.Entities.Agenda
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Editar Agenda</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>@Model.Titulo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        @Html.Hidden("actionRedir", (string)ViewBag.ActionRedir)
+        @Html.HiddenFor(model => model.AgendaID)
+        @Html.HiddenFor(model => model.UserName)
+        @Html.HiddenFor(model => model.Icone)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Titulo, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cor, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cor, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-2" for="Icone">
+                Icone
+                <p><a href="javascript:void(0);" id="Icone-link">Clique para adicionar <i class="fa fa-plus-square-o"></i></a></p>
+            </label>
+            <div class="col-md-10">
+                <div style="padding-top:10px;">
+                    <i class="@Model.Icone fa-3x" id="icone-selected"></i>
+                </div>
+                <div id='modal-icone' class='modal fade in'>
+                    <div class="modal-dialog" style="width: 700px;">
+                        <div class="modal-content">
+                            <div id='modal-content' style="padding:20px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center">
+            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-outline btn-danger" })
+            <input type="submit" value="Salvar" class="btn btn-outline btn-success" />
+        </div>
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/main");
+}

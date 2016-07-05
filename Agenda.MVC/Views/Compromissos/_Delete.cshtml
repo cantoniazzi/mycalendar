@@ -1,0 +1,65 @@
+﻿@model Agenda.Entities.Compromisso
+
+@{ 
+    Layout = null;
+    var ajaxOptions = new AjaxOptions();
+    ajaxOptions.HttpMethod = "POST";
+    ajaxOptions.OnSuccess = "closeModal";
+    ajaxOptions.UpdateTargetId = "compromisso-delete-modal";
+}
+<h3 align="center">Deseja realmente remover @Model.Titulo?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Assunto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Assunto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Local)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Local)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraInicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraInicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HoraFim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HoraFim)
+        </dd>
+    </dl>
+    @using (Ajax.BeginForm("Delete", "Compromissos", ajaxOptions))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <div class="text-center">
+                <a class="btn btn-outline btn-danger" data-dismiss="modal">Cancelar</a>
+                <input type="submit" value="Remover" class="btn btn-outline btn-success" />
+            </div>
+        </div>
+    }
+</div>
+

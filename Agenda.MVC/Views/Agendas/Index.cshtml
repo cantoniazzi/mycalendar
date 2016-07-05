@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Agenda.Entities.Agenda>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Agendas - Listar</h2>
+
+@Html.ActionLink("Adicionar Agenda", "Create", null, new { @class = "btn btn-outline btn-primary" })
+<br /><br />
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-lg-4 col-md-7">
+            <div class="panel" style="background-color: @item.Cor;">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <i class="@item.Icone fa-5x"></i>
+                            <h2>
+                                <a href="@Url.Action("Details","Agendas",new { id = item.AgendaID })" title="Exibir agenda">
+                                    @item.Titulo
+                                </a>
+                            </h2>
+                            <div id='modal-window' class='modal fade in'>
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div id='content-window-details' style="padding:20px;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-9 text-right">
+                            <a href="@Url.Action("Edit","Agendas",new { id = item.AgendaID, actionRedir = "Index" })" title="Editar agenda"><i class="fa fa-pencil fa-lg action-icon"></i></a>
+                            <a href="@Url.Action("Delete","Agendas",new { id = item.AgendaID })" title="Remover agenda"><i class="fa fa-remove fa-lg action-icon"></i></a>
+                            <div class="huge" title="@item.Compromissos.Count compromisso(s) na agenda">
+                                <i class="fa fa-hand-o-right" aria-hidden="true"></i>@item.Compromissos.Count
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <a href="javascript:void(0);" class="link-open-compromissos" data-agenda-id="@item.AgendaID">
+                        <span class="pull-right">exibir compromissos</span> <i class="fa fa-plus-circle"></i>
+                    </a>
+                    <div class="clearfix"></div>
+                    <div id="compromissos-@item.AgendaID" style="display:none;">
+                        <div id="content-compromissos-@item.AgendaID" style="margin-top: 15px;"></div> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/main");
+}

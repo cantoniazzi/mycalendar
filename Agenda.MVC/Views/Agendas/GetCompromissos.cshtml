@@ -1,0 +1,52 @@
+﻿@model IEnumerable<Agenda.Entities.Compromisso>
+
+@{
+    Layout = null;
+}
+<ul class="list-group">
+    @if (Model.Count() > 0)
+    {
+        foreach (var compromisso in Model)
+        {
+            <li class="list-group-item" style="padding: 2px;">
+                <div class="text-left" style="padding:0;margin:0;float:left;">
+                    <a style="font-size:12px;" data-id="@compromisso.ID" data-view="/Compromissos/details/" title="Detalhes do compromissos" href="javascript:void(0);" class="link-modal">
+                        @compromisso.Titulo
+                    </a>
+                </div>
+                <div class="text-right" style="padding:0;margin:0;">
+                    <a title="Editar compromisso" data-height="480px" data-width="500px" data-id="@compromisso.ID" data-view="/Compromissos/edit/" href="javascript:void(0);" class="link-modal"><span class="glyphicon glyphicon-pencil" oculta-aria="true" /></a>
+                    <a title="Exportar compromisso" href="@Url.Action("ExportCompromisso","Compromissos", new { id = compromisso.ID })"><span class="glyphicon glyphicon-random" oculta-aria="true" /></a>
+                    <a title="Remover compromisso" data-height="380px" data-width="500px" data-id="@compromisso.ID" data-view="/Compromissos/delete/" href="javascript:void(0);" class="link-modal"><span class="glyphicon glyphicon-remove" oculta-aria="true" /></a>
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        <li class="list-group-item" style="padding: 2px;">
+            <div class="text-center">
+                <p>Não existem compromissos nesta agenda</p>
+            </div>
+        </li>
+    }
+
+</ul>
+<script>
+    //open modal details
+    $('.link-modal').click(function () {
+        var id = $(this).attr("data-id");
+        var view = $(this).attr("data-view");
+        var width = $(this).attr("data-width");
+        var height = $(this).attr("data-height");
+
+        $('#modal-window').find(".modal-dialog").width(width);
+        $('#modal-window').find(".modal-content").height(height);
+
+        console.log($('#modal-window').find(".modal-content").height());
+
+        $('#content-window-details').load(view + id, function () {
+            $('#modal-window').modal({ keyboard: true, }, 'show');
+        });
+    });
+</script>

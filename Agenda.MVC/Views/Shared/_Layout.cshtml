@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Minha Agenda</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+                <a href="@Url.Action("Index","Agendas",new { area = "" })" class="navbar-brand">
+                    <i class="fa fa-calendar"></i>
+                    Minha agenda
+                </a>
+                @*
+                @Html.ActionLink("Agenda", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                *@
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Agendas", "Index", "Agendas")</li>
+                    <li>@Html.ActionLink("Compromissos", "Index", "Compromissos")</li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+    <footer style="position: fixed; height: 60px; bottom: 0; width: 100%;">
+        <div class="container-fluid navbar-inverse text-center" style="height: 60px;">
+            <p class="text-muted" style="padding:20px;">&copy; @DateTime.Now.Year/1 - Minha agenda - Programa DELL It Academy</p>
+        </div>
+    </footer>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jquerydatetimepicker")
+    @Scripts.Render("~/bundles/color-picker")
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        $(function () {
+            $('.datetimepicker').value = '';
+            $.datetimepicker.setLocale('pt-BR');
+
+            $('.datetimepicker').datetimepicker({
+                format: 'd/m/Y H:i',
+                dayOfWeekStart: 0,
+                lang: 'pt-BR'
+            });
+
+            $('.datepicker').datetimepicker({
+                format: 'd/m/Y',
+                timepicker: false,
+                dayOfWeekStart: 0,
+                lang: 'pt-BR'
+            });
+
+            $('#Cor').paletteColorPicker({
+                //custom_class: 'wide',
+                clear_btn: 'last',
+                colors: [
+                  { "#D50000": "#D50000" },
+                  { "#304FFE": "#304FFE" },
+                  { "#00B8D4": "#00B8D4" },
+                  { "#00C853": "#00C853" },
+                  { "#FFD600": "#FFD600" },
+                  { "#FF1744": "#FF1744" },
+                  { "#3D5AFE": "#3D5AFE" },
+                  { "#00E5FF": "#00E5FF" },
+                  { "#00E676": "#00E676" },
+                  { "#FFEA00": "#FFEA00" },
+                  { "#FF9100": "#FF9100" },
+                  { "#FF5252": "#FF5252" },
+                  { "#536DFE": "#536DFE" },
+                  { "#18FFFF": "#18FFFF" },
+                  { "#69F0AE": "#69F0AE" },
+                  { "#FFFF00": "#FFFF00" },
+                  { "#FFAB40": "#FFAB40" }
+                ],
+                //position: 'upside', // default -> 'upside'
+            });
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

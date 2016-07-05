@@ -1,0 +1,13 @@
+﻿@model Agenda.Entities.Compromisso
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = null;
+}
+<div id="compromisso-delete-modal">
+    @Html.Partial("_Delete", Model)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

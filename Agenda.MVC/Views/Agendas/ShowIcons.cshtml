@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Minha Agenda</title>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+    @foreach (var item in Model)
+    {
+        <a style="padding:4px;cursor:pointer;" title="Clique para selecionar" class="link-select-icon" href="javascripit:void(0);">
+            @Html.Raw(item)
+        </a>
+    }
+</body>
+</html>
+<script>
+    $(document).ready(function () {
+        //select icon and set icon class in the input
+        $('.link-select-icon').click(function () {
+            var icon = $(this).find('i').attr("class");
+            $('#icone-selected', parent.document).attr("class", icon + " fa-3x");
+            $('#Icone', parent.document).val(icon);
+            closeModal();
+        });
+    });
+</script>

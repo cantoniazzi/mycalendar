@@ -1,0 +1,25 @@
+﻿@model Agenda.Entities.Agenda
+
+<h2>Exibir Agenda</h2>
+<div>
+    <h4>Agenda - @Model.Titulo</h4>
+    <hr />
+    <div class="col-lg-12">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+        </dl>
+    </div>
+    <div id="compromisso-list" class="col-lg-12">
+        @Html.Partial("_CompromissoList", Model.Compromissos)
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Editar agenda", "Edit", "Agendas", new { id = Model.AgendaID, actionRedir = "Details" }, new { @class = "btn btn-primary" })
+
+    @Html.ActionLink("Adicionar compromisso", "Create", "Compromissos", new { AgendaID = Model.AgendaID }, new { @class = "btn btn-primary" })
+</p>

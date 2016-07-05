@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Agenda.Entities.Compromisso>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listar compromissos</h2>
+<div id="compromisso-list">
+    @Html.Partial("_CompromissoList", Model)
+</div>

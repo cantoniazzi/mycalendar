@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Agenda.Entities.Compromisso>
+
+@{
+    //get current controller because this view is utilized in agenda details and compromisso index
+    var controllerName = @HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString();
+
+    var options = new AjaxOptions();
+    options.HttpMethod = "GET";
+    options.UpdateTargetId = "compromisso-list";
+}
+
+@using (Ajax.BeginForm("Filter", controllerName, options))
+{
+    <div id="top" class="row">
+        <div class="col-lg-12">
+            <h4 align="left">Compromissos</h4>
+            <br />
+        </div>
+        @if (controllerName != "Agendas")
+        {
+            <div class="col-md-4 text-left">
+                <div class="input-group">
+                    <label for="SelectAgenda">Agenda:</label>
+                    <span class="input-group-addon">
+                        <i class="glyphicon glyphicon-folder-open"></i>
+                    </span>
+                    @Html.DropDownList("SelectAgenda", null, "All", new { @class = "form-control" })
+                </div>
+            </div>
+        }
+        <div class="col-md-4 text-right">
+            <div class="input-group">
+                <label for="SearchData">Data:&nbsp;</label>
+                <span class="input-group-addon">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </span>
+                @Html.TextBox("SearchData", null, new { @class = "form-control datepicker" })
+            </div>
+        </div>
+        <div class="col-md-4 text-center" style="position:relative;">
+            <button type="submit" class="btn btn-primary btn-sm">
+                <span class="glyphicon glyphicon-search"></span>  Filtrar
+            </button>
+        </div>
+    </div>
+}
+<div id="list" class="row margin-top-20">
+    <div class="table-responsive col-md-12">
+        <table class="table table-striped" cellspacing="0" cellpadding="0">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Titulo)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Local)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HoraInicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.HoraFim)
+                    </th>
+                    <th class="actions"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ID)
+                        </td>
+                        <td>
+                            @Html.ActionLink(item.Titulo, "Details", new { id = item.ID })
+                            <p>
+                                @Html.DisplayFor(modelItem => item.Assunto)
+                            </p>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Local)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoraInicio)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HoraFim)
+                        </td>
+                        @*
+                            <td class="actions">
+                                @Html.ActionLink("Exportar", "ExportCompromisso","Compromissos", new { id = item.ID }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Editar", "Edit", "Compromissos", new { id = item.ID }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Exibir", "Details", "Compromissos", new { id = item.ID }, new { @class = "btn btn-warning btn-xs" })
+                                @Html.ActionLink("Remover", "Delete", "Compromissos", new { id = item.ID }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        *@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

@@ -1,0 +1,39 @@
+﻿@model Agenda.Entities.Agenda
+
+@{
+    ViewBag.Title = "Delete";
+}
+<h2>Agenda @Model.Titulo</ h2 >
+<h3>Deseja realmente remover esta agenda?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-actions no-color">
+            <div class="text-center">
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-outline btn-danger" })
+                <input type="submit" value="Remover" class="btn btn-outline btn-success" />
+            </div>
+        </div>
+    }
+</div>
